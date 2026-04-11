@@ -1,5 +1,81 @@
 import axios from "axios";
 
+const BASE_URL = "http://127.0.0.1:8000";
+
+async function apiFetch(endpoint: string, opciones: RequestInit = {}) {
+    // 1. Preparar headers con el token actual
+    const headers = {
+        ...opciones.headers,
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+    };
+
+    // 2. Intentar la petición original
+    let response = await fetch(`${BASE_URL}${endpoint}`, {
+        ...opciones,
+        headers,
+        credentials: "include" // Importante para las cookies
+    });
+
+    // 3. Si el error es 401 (Token expirado), intentamos el Refresh
+    if (response.status === 401) {
+        const refreshRes = await fetch(`${BASE_URL}/sistemaWeb/api/token/refresh/`, {
+            method: "POST",
+            credentials: "include", // Envía la cookie refresh_token a Django
+        });
+
+        if (refreshRes.ok) {
+            const data = await refreshRes.json();
+            localStorage.setItem('access_token', data.access); // Guardamos el nuevo access_token
+
+            // 4. Reintentamos la petición original con el nuevo token
+            return await fetch(`${BASE_URL}${endpoint}`, {
+                ...opciones,
+                headers: {
+                    ...opciones.headers,
+                    'Authorization': `Bearer ${data.access}`
+                },
+                credentials: "include"
+            });
+        } else {
+            // El Refresh Token también murió (pasaron 30 días)
+            localStorage.removeItem('access_token');
+            window.location.href = "/"; // Al landing
+        }
+    }
+
+    return response;
+}
+
+/** API REST DEL PERFIL - NOMBRE */
+export const profile = async () => {
+    const response = await apiFetch("/sistemaWeb/api/profile", { method: "POST" });
+    const data = await response.json();
+    return data;
+}
+export const getTotalPlantas = async () => {
+    const response = await apiFetch("/sistemaWeb/api/total-plantas", { method: "GET" });
+    const data = await response.json();
+    return data;
+}
+export const getTotalAportes = async () => {
+    const response = await apiFetch("/sistemaWeb/api/total-aportes", { method: "GET" });
+    const data = await response.json();
+    return data;
+}
+
+/** API REST DEL JUEGO */
+const apiProgreso = axios.create({baseURL: 'http://127.0.0.1:8000/sistemaWeb/api/progreso/'});
+
+// export const getProgresoJuego = () =>  apiProgreso.get('/',{
+//     headers:{
+//         'Authorization': `Token ${localStorage.getItem('token')}`
+//     }
+// });
+export const getProgresoJuego = async () => {
+    const response = await apiFetch("/sistemaWeb/api/progreso/", { method: "GET" });
+    const data = await response.json();
+    return data;
+}
 /** API REST DE PLANTA */
 const apiPlanta = axios.create({
     baseURL: 'http://127.0.0.1:8000/sistemaWeb/api/planta/', 
@@ -85,17 +161,14 @@ export const forgotPassword = (correo: string) =>
         correo
 });
   
-/** API REST DE USUARIO */
+/** API REST DEL LINK PARA GENERAR USUARIO */
 export const createUser = async (
-    newuser: {
-       first_name: string, 
-       last_name: string
+    newuser: {     
+       first_name: string,
        email: string, 
-       username: string, 
-       password: string, 
     }
 ) => {
-    const response = await fetch("http://127.0.0.1:8000/sistemaWeb/api/registrar_usuario", {
+    const response = await fetch("http://127.0.0.1:8000/sistemaWeb/api/generar-link", {
         method: "POST", 
         headers: {"Content-Type": "application/json"}, 
         body: JSON.stringify(newuser), 
@@ -122,48 +195,11 @@ export const login = async (userData: { username: string, password: string }) =>
     return data; 
 };
 
-/** API REST DEL PERFIL - NOMBRE */
-export const profile = async() => {
-    const response = await fetch("http://127.0.0.1:8000/sistemaWeb/api/profile", {
-        method: "POST",
-        headers:{
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    });
-    const data = await response.json();
-    return data;
-}
 
-export const getTotalPlantas = async() => {
-    const response = await fetch("http://127.0.0.1:8000/sistemaWeb/api/total-plantas", {
-        method: "GET",
-        headers:{
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    });
-    const data = await response.json();
-    return data;
-}
 
-export const getTotalAportes = async() => {
-    const response = await fetch("http://127.0.0.1:8000/sistemaWeb/api/total-aportes", {
-        method: "GET",
-        headers:{
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    });
-    const data = await response.json();
-    return data;
-}
+ 
 
-/** API REST DEL JUEGO */
-const apiProgreso = axios.create({baseURL: 'http://127.0.0.1:8000/sistemaWeb/api/progreso/'});
 
-export const getProgresoJuego = () =>  apiProgreso.get('/',{
-    headers:{
-        'Authorization': `Token ${localStorage.getItem('token')}`
-    }
-});
 
 export const updateContadorMensajes = async () => {
     const res = await apiProgreso.post('incrementar-contador-msj/',{},

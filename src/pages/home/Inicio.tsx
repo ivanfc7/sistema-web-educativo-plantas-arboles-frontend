@@ -6,7 +6,7 @@ interface Progreso {
 
 import { BarraNavegacion } from "../../components/BarraNavegacion"
 import { Footer } from "../../components/PiePagina";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { getProgresoJuego, profile, getTotalPlantas, getTotalAportes } from "../../assets/utils/sistema.api";
 import { useEffect, useState } from "react";
 
@@ -18,6 +18,7 @@ export function Home(){
     const [totalTemasDesbloqueados, setTotalTemasDesbloqueados] = useState(0);
     const [totalPlantas, setTotalPlantas] = useState(0);
     const [totalAportes, setTotalAportes] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(()=> {
         const cargarProgreso = async ()=>{
@@ -28,9 +29,11 @@ export function Home(){
         };
         const perfilUsuario = async()=>{
             const response = await profile();
+            console.log(response);
+            
             setNombreCompleto(response.firstName + " "+ response.lastName);
             setEmail(response.email);
-
+            
             const resPlants = await getTotalPlantas();
             setTotalPlantas(resPlants.total);
            
@@ -40,7 +43,13 @@ export function Home(){
         cargarProgreso();
         perfilUsuario();
     }, []);
-
+    useEffect(() => {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            // Si no hay token, fuera de aquí
+            navigate('/');
+        }
+    }, [navigate]);
     return (
         <section className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-lime-300 flex flex-col">
             <BarraNavegacion />

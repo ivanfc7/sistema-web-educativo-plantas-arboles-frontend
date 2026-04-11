@@ -19,7 +19,7 @@ export function Carrusel(){
         }
       ];
     return (
-        <div className="w-full max-w-2x1 mx-auto h-80 sm:h-72 md:h-64 lg-h-64 xl:h-[22rem] 2xl:h-[24rem]">
+        <div className="w-full max-w-2x1 mx-auto h-70 sm:h-68 md:h-60 lg-h-64 xl:h-[22rem] 2xl:h-[24rem]">
           <Carousel className="h-full">
               {slides.map((slide, index) => (
                   <div key={index} className='flex flex-col items-center jutify-center text-center p-4 h-full'>

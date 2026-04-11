@@ -30,7 +30,7 @@ export default function(){
     });
 
     return(
-        <div className="w-full max-w-sm p-4 bg-white border border-green-400 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-white dark:border-gray-700">
+        <div className="w-full max-w-sm p-4 ">
            {huboError && (
                 <div
                     className="mt-4 rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 shadow-sm"
