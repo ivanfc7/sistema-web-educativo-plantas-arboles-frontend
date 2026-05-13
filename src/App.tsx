@@ -11,7 +11,6 @@ import { VistaR } from "./pages/recomendaciones/VistaR";
 import { VistaMensajes } from "./pages/juego/VistaMensajes";
 import { VistaAprendizaje } from "./pages/juego/VistaAprendizaje";
 import { CreateUsr } from "./pages/usuario/CreateUsr";
-import ResetPassword  from "./pages/usuario/ResetPassword";
 import { ValidarUsuario } from "./pages/usuario/ValidarUsr";
 
 function App(){
@@ -30,7 +29,6 @@ function App(){
         <Route path="/consejos-encontrados/:id" element={<VistaMensajes /> }/>
         <Route path="/mis-aprendizajes/:id" element={<VistaAprendizaje /> }/>
         <Route path="/crear-cuenta" element={<CreateUsr/>} />
-        <Route path="/reset-password/:uid/:token" element={<ResetPassword />}/>
         <Route path="/verify-magic/:token" element={<ValidarUsuario /> } />
       </Routes>
       <Toaster />

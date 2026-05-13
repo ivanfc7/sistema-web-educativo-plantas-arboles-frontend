@@ -29,7 +29,7 @@ export function Step4Resultado({datos}: Acciones){
     const navegacion = useNavigate();
     const {register, handleSubmit} = useForm<PlantaData>();
    
-    const guardarPlanta = handleSubmit(async (data: PlantaData) => {
+    const guardarResumen = handleSubmit(async (data: PlantaData) => {
       const idPlant: number = datos.idPlanta;
       const aporte = {
         ...data,
@@ -111,12 +111,12 @@ export function Step4Resultado({datos}: Acciones){
                 <p className="text-cyan-700 text-sm font-medium"> ✅ Cantidad: {datos.cantidadPlantas}</p>
                 <p className="text-cyan-700 text-sm font-medium"> ✅ Aporte Ambiental: {datos.CO2Total.toFixed(2)} Kg.</p>
                 <p className="mt-5"> ¿Deseas guardar el aporte de tu planta en el historial ?</p>
-                <form onSubmit={guardarPlanta}>
+                <form onSubmit={guardarResumen}>
                   <input type="number" className="hidden" {...register('cantidad')} defaultValue={datos.cantidadPlantas}/>
                   <input type="number" className="hidden" {...register('oxigenoTotal')} defaultValue={datos.oxigenoTotal.toFixed(2)}/>
                   <input type="number" className="hidden" {...register('carbonoTotal')} defaultValue={datos.carbonoTotal.toFixed(2)}/>
                   <input type="number" className="hidden" {...register('co2Total')} defaultValue={datos.CO2Total.toFixed(2)}/>
-                  <button onClick={guardarPlanta} className="text-white font-bold cursor-pointer rounded-lg mt-2 bg-green-500 hover:bg-green-600 text-sm sm:w-auto px-5 py-2.5 text-center focus:ring-green-300">Si! ⮞</button>
+                  <button onClick={guardarResumen} className="text-white font-bold cursor-pointer rounded-lg mt-2 bg-green-500 hover:bg-green-600 text-sm sm:w-auto px-5 py-2.5 text-center focus:ring-green-300">Si! ⮞</button>
                 </form>
               </div>
             </div>         

@@ -100,6 +100,8 @@ export function Layout1(){
     const onCancel = () => setMostrar(false);
 
     const buscarDescripcion = () => {
+        console.log('buscando');
+        
         if (especie.trim() !== "") {
             async function busquedaDescripcion(especie: string) {
                 setBuscando(true);
@@ -120,6 +122,7 @@ export function Layout1(){
                         setError(`No se encontró información para "${especie}". Puedes escribir una descripción realizando una busqueda en Google.`);
                       } else {
                         setError("Ocurrió un error al buscar la descripción.");
+                        console.log(err);
                       }
                       setDescripcion("");
                       setMostrarDescripcion(false);

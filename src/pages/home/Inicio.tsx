@@ -38,6 +38,7 @@ export function Home(){
             setTotalPlantas(resPlants.total);
            
             const resAport = await getTotalAportes();
+            console.log(resAport);
             setTotalAportes(resAport.total);
         }
         cargarProgreso();
