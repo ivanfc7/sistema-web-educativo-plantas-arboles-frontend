@@ -187,28 +187,28 @@ export enum TipoPlanta {
 // Interfaces para las etapas de crecimiento de cada tipo de planta
 export interface EtapasArbol {
     semilla: number;
-    plantín: number;
+    plantin: number;
     planta_joven: number;
     arbol_adulto: number;
 }
   
 export interface EtapasArbusto {
     semilla: number;
-    plantín: number;
+    plantin: number;
     planta_joven: number;
     arbusto_adulto: number;
 }
   
 export interface EtapasFlor {
     semilla: number;
-    plantín: number;
+    plantin: number;
     planta_joven: number;
     floracion: number;
 }
   
 export interface EtapasSuculenta {
     semilla: number;
-    plantín: number;
+    plantin: number;
     planta_joven: number;
     planta_adulta: number;
 }
@@ -216,25 +216,25 @@ export interface EtapasSuculenta {
 const kcValores = {
     [TipoPlanta.Arbol]: {
       semilla: 0.10,
-      plantín: 0.5,
+      plantin: 0.5,
       planta_joven: 0.8,
       arbol_adulto: 0.9
     } as EtapasArbol,
     [TipoPlanta.Arbusto]: {
       semilla: 0.10,
-      plantín: 0.5,
+      plantin: 0.5,
       planta_joven: 0.8,
       arbusto_adulto: 0.9
     } as EtapasArbusto,
     [TipoPlanta.Flor]: {
       semilla: 0.10,
-      plantín: 0.6,
+      plantin: 0.6,
       planta_joven: 0.9,
       floracion: 1.15
     } as EtapasFlor,
     [TipoPlanta.Suculenta]: {
       semilla: 0.10,
-      plantín: 0.15,
+      plantin: 0.15,
       planta_joven: 0.20,
       planta_adulta: 0.25
     } as EtapasSuculenta,
@@ -254,7 +254,7 @@ export function estimarFrecuenciaRiego(tipoPlanta: TipoPlanta, etapaPlanta: keyo
      // 1. Obtener ET0 según el clima
     const et0 = et0Valores[clima];
 
-    // Validar si el tipo de planta y etapa coinciden
+    // // Validar si el tipo de planta y etapa coinciden
     if (!kcValores[tipoPlanta] || !kcValores[tipoPlanta][etapaPlanta as keyof typeof kcValores[keyof typeof kcValores]]) {
         return `Error: La etapa '${etapaPlanta}' no es válida para el tipo de planta '${tipoPlanta}'.`;
     }
@@ -269,7 +269,6 @@ export function estimarFrecuenciaRiego(tipoPlanta: TipoPlanta, etapaPlanta: keyo
      // 4. Usar reglas heurísticas para la frecuencia de riego
     let frecuenciaEstimada:string = "";
     if (tipoPlanta === 'suculenta') {
-        // Las suculentas tienen necesidades específicas, menos agua en general
         if (clima === 'caluroso') {
         frecuenciaEstimada = "1 vez por semana";
         } else {
@@ -278,11 +277,11 @@ export function estimarFrecuenciaRiego(tipoPlanta: TipoPlanta, etapaPlanta: keyo
     } else {
         // Frecuencia general para otras plantas basada en ETc
         if (etc >= 6) {
-        frecuenciaEstimada = "Diariamente o 1-2 veces al día";
+            frecuenciaEstimada = "Diariamente o 1-2 veces al día";
         } else if (etc >= 4) {
-        frecuenciaEstimada = "2-3 veces por semana";
+            frecuenciaEstimada = "2-3 veces por semana";
         } else {
-        frecuenciaEstimada = "1-2 veces por semana";
+            frecuenciaEstimada = "1-2 veces por semana";
         }
     }
 

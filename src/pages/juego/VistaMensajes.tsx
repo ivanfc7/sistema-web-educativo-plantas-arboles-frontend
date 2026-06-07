@@ -3,6 +3,7 @@ import { BarraNavegacion } from "../../components/BarraNavegacion";
 import { ArrowLeftSquare } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getMensajesDesbloqueados } from "../../assets/utils/sistema.api";
+import { useParams } from "react-router-dom";
 
 interface MensajeData {
     id: number;
@@ -13,9 +14,10 @@ interface MensajeData {
 export function VistaMensajes(){
     const navegacion = useNavigate();
     const [lista, setLista] = useState<MensajeData[]>([]);
+    const params = useParams()
 
     async function cargarMensajes(){
-        const res = await getMensajesDesbloqueados(1);
+        const res = await getMensajesDesbloqueados(Number(params.id));
         setLista(res.data);
     }
     

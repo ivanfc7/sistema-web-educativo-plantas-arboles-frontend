@@ -90,17 +90,15 @@ const armarLaberinto = (mapa: string[][]): string[][] => {
 
     let pos = 0;
 
-    const tendraE = Math.random() < 0.5;
-    console.log("la respuesta es: "+tendraE);
-    if (tendraE) contador +=1;
-    console.log("el contador es "+contador);
+    const tendraAbeja = Math.random() < 0.5;
+    if (tendraAbeja) contador +=1;
 
-    if(tendraE && contador === 1){
+    if(tendraAbeja && contador === 1){
         if (pos < espaciosDisponibles.length) {
             const [i, j] = espaciosDisponibles[pos++];
             mapaRespuesta[i][j] = 'E';
         }
-        console.log('Este laberinto tiene E');
+        console.log('Este laberinto tiene Abeja');
         
         if (pos < espaciosDisponibles.length) {
             const [i, j] = espaciosDisponibles[pos++];

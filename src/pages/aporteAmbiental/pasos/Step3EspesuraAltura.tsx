@@ -55,7 +55,7 @@ export function Step3EspesuraAltura({atras, siguiente, datos, datoActual}: Accio
           plantas: plantas
         };
       
-        var respuesta = calcularImpacto(datosFinales);
+        let respuesta = calcularImpacto(datosFinales);
         datos(respuesta); 
         siguiente(); 
     }); 
@@ -81,14 +81,14 @@ export function Step3EspesuraAltura({atras, siguiente, datos, datoActual}: Accio
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
                                 Altura (en cm.) 
                             </label>
-                            <input  type="number"
+                            <input  type="number" step="0.01"
                                 {...register('alturaComun', {required: true})}
                                 className="bg-white border border-green-300 text-black text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5"/> </div>
                         <div className="relative z-0 group">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
                                 Diametro aproximado (tronco cm.) 
                             </label>
-                            <input  type="number" 
+                            <input  type="number" step="0.01"
                                 {...register('grosorComun', {required: true})}
                                 className="bg-white border border-green-300 text-black text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5"/> </div>
                     </div>
@@ -100,10 +100,8 @@ export function Step3EspesuraAltura({atras, siguiente, datos, datoActual}: Accio
             <br />
             <div className="flex flex-row space-x-2.5">
                 Necesitas ayuda para llenar los valores: 
-                <button
-                    onClick={() => setMostrar(!mostrar)}
-                    className="text-blue-600 hover:text-blue-800 cursor-pointer ml-1.5"
-                >
+                <button onClick={() => setMostrar(!mostrar)}
+                    className="text-blue-600 hover:text-blue-800 cursor-pointer ml-1.5">
                     <HelpCircle className="w-5 h-5" />
                 </button>
                 {mostrar && (
@@ -123,7 +121,7 @@ export function Step3EspesuraAltura({atras, siguiente, datos, datoActual}: Accio
                                 Altura aproximada (en cm.)
                             </label>
                             <input
-                                type="number"
+                                type="number" step="0.01"
                                 {...register(`altura_${index}`, {required: true})}
                                 placeholder="40"
                                 className="bg-white border border-green-300 text-black text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5"
@@ -135,7 +133,7 @@ export function Step3EspesuraAltura({atras, siguiente, datos, datoActual}: Accio
                                 Diametro aproximado (tronco cm.)
                             </label>
                             <input
-                                type="number"
+                                type="number" step="0.01"
                                 {...register(`grosor_${index}`, {required: true})}
                                 placeholder="110"
                                 className="bg-white border border-green-300 text-black text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5"

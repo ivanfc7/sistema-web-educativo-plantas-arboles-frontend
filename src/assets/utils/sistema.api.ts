@@ -28,8 +28,7 @@ async function apiFetch(endpoint: string, opciones: RequestInit = {}) {
 
     if (opciones.body) {
         if (opciones.body instanceof FormData) {
-            // ¡IMPORTANTE!: Si es FormData, ELIMINAMOS el Content-Type
-            // El navegador lo pondrá automáticamente con el "boundary" correcto
+            // Si es FormData, ELIMINAMOS el Content-Type
             delete headers['Content-Type'];
         } else {
             // Si es un objeto normal (JSON), aseguramos que sea application/json
@@ -46,7 +45,7 @@ async function apiFetch(endpoint: string, opciones: RequestInit = {}) {
         credentials: "include" // Importante para las cookies
     });
 
-    // 3. Si el error es 401 (Token expirado), intentamos el Refresh
+    // (Token expirado)
     if (response.status === 401) {
         const refreshRes = await fetch(`${BASE_URL}/token/refresh/`, {
             method: "POST",

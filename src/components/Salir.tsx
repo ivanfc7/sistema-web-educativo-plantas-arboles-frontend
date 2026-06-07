@@ -13,6 +13,6 @@ export function Salir(){
     }
 
     return (
-        <button onClick={salir} className="cursor-pointer text-white rounded-lg mt-5 ml-3 bg-red-500 p-2 hover:bg-red-600" >🗙 Salir</button>
+        <button onClick={salir} className="cursor-pointer text-neutral-600 rounded-lg mt-5 ml-3 p-2 hover:bg-gray-300" > &#9664; Volver </button>
     )
 }

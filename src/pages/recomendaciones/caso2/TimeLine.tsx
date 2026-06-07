@@ -12,25 +12,25 @@ type TimeLineProps = {
 const etapasPorTipo: Record<string, { id: string; nombre: string }[]> = {
     arbol: [
         { id: 'semilla', nombre: "Semilla 🌱" },
-        { id: 'plantín', nombre: "Plantin 🌿" },
+        { id: 'plantin', nombre: "Plantin 🌿" },
         { id: 'planta_joven', nombre: "Planta Joven 🌳" },
         { id: 'arbol_adulto', nombre: "Arbol Adulto 🌴" },
     ],
     arbusto: [
         { id: 'semilla', nombre: "Semilla 🌱" },
-        { id: 'plantín', nombre: "Plantin 🌿" },
+        { id: 'plantin', nombre: "Plantin 🌿" },
         { id: 'planta_joven', nombre: "Planta Joven 🌳" },
         { id: 'arbol_adulto', nombre: "Arbusto Adulto 🌴" },
     ],
     flor: [
         { id: 'semilla', nombre: "Semilla 🌱" },
-        { id: 'plantín', nombre: "Plantin 🌿" },
+        { id: 'plantin', nombre: "Plantin 🌿" },
         { id: 'planta_joven', nombre: "Planta Joven 🌳" },
         { id: 'floracion', nombre: "Floración 🌸" },
     ],
     suculenta: [
         { id: 'semilla', nombre: "Semilla 🌱" },
-        { id: 'plantín', nombre: "Plantin 🌿" },
+        { id: 'plantin', nombre: "Plantin 🌿" },
         { id: 'planta_joven', nombre: "Planta Joven 🌳" },
         { id: 'floracion', nombre: "Planta Adulta 🌸" },
     ]

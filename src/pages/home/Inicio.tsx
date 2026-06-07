@@ -24,6 +24,7 @@ export function Home(){
         const cargarProgreso = async ()=>{
             const res = await getProgresoJuego();
             setProgresoJuego(res.data[0]);
+            console.log(progresoJuego);
             setTotalConsejosDesbloqueados(res.data[0].cantidadMsjDesbloqueados)
             setTotalTemasDesbloqueados(res.data[0].cantidadApzjDesbloqueados)
         };
@@ -47,7 +48,6 @@ export function Home(){
     useEffect(() => {
         const token = localStorage.getItem('access_token');
         if (!token) {
-            // Si no hay token, fuera de aquí
             navigate('/');
         }
     }, [navigate]);

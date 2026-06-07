@@ -4,6 +4,7 @@ import { ArrowLeftSquare, ChevronDown, ChevronUp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getAprendizajeDesbloqueado } from "../../assets/utils/sistema.api";
 import ReactMarkdown from 'react-markdown';
+import { useParams } from "react-router-dom";
 
 interface AprendizajeData {
     id: number;
@@ -19,9 +20,11 @@ export function VistaAprendizaje(){
     const [expandidoIndex, setExpandidoIndex] = useState<number | null>(null);
     const [lista, setLista] = useState<AprendizajeData[]>([]);
     const navegacion = useNavigate();
+    const params = useParams(); 
 
     async function cargarAprendizajes(){
-        const res = await getAprendizajeDesbloqueado(1);
+        console.log(params.id);
+        const res = await getAprendizajeDesbloqueado(Number(params.id));
         setLista(res.data);
     }
 

@@ -9,9 +9,8 @@ export function LandingPage() {
     const [mostrarModal, setMostrarModal] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
-        const token = localStorage.getItem('access_token'); // o 'access_token'
+        const token = localStorage.getItem('access_token'); 
         if (token) {
-            // ¡Si ya tiene sesión, no lo dejes en la landing!
             navigate('/inicio');
         }
     }, [navigate]);
