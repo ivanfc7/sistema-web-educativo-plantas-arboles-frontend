@@ -7,7 +7,7 @@ export const createUser = async (
        email: string, 
     }
 ) => {
-    const response = await fetch("http://127.0.0.1:8000/sistemaWeb/api/generar-link", {
+    const response = await fetch("https://sistema-web-educativo-plantas-y-arboles-ntfs.onrender.com/sistemaWeb/api/generar-link", {
         method: "POST", 
         headers: {"Content-Type": "application/json"}, 
         body: JSON.stringify(newuser), 
@@ -16,7 +16,7 @@ export const createUser = async (
     return data;
 }
 
-const BASE_URL = "http://127.0.0.1:8000/sistemaWeb/api";
+const BASE_URL = "https://sistema-web-educativo-plantas-y-arboles-ntfs.onrender.com/sistemaWeb/api";
 
 async function apiFetch(endpoint: string, opciones: RequestInit = {}) {
     // 1. Preparar headers con el token actual
@@ -197,7 +197,7 @@ export const getAportesByPlanta = async(id: string) => {
 
 /** API REST DE FUNCION BUSQUEDA */
 export const findDescripcion = (palabra: string) =>
-    axios.get(`http://127.0.0.1:8000/sistemaWeb/api/buscar_descripcion/`, {
+    axios.get(`https://sistema-web-educativo-plantas-y-arboles-ntfs.onrender.com/sistemaWeb/api/buscar_descripcion/ `, {
       params: { palabra }
 });
 
