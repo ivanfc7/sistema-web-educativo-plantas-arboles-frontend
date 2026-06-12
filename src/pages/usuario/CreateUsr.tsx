@@ -18,7 +18,6 @@ export function CreateUsr(){
             email: data.email,
         }
         generarLink(datos);
-        toast.success('Correo enviado!!');
     });
 
     const generarLink = async (data: Newuser) => {
@@ -27,8 +26,10 @@ export function CreateUsr(){
         }
         try {
             await createUser(newuser);
+            toast.success('Correo enviado!!');
         } catch (error) {
             console.log(error);
+            toast.error('Hubo un error');
         }
     }
 
