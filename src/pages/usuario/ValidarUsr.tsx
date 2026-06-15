@@ -11,7 +11,7 @@ export function ValidarUsuario(){
         const verificar = async() => {
             try {
               // Llamada a tu endpoint de Django
-            const response = await axios.get(`http://127.0.0.1:8000/sistemaWeb/api/verificar-token?token=${token}`, {
+            const response = await axios.get(`https://sistema-web-educativo-plantas-y-arboles-ntfs.onrender.com/sistemaWeb/api/verificar-token?token=${token}`, {
                     withCredentials: true // IMPORTANTE para que el navegador guarde la cookie
                 });
 
