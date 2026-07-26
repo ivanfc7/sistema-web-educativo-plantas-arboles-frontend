@@ -21,9 +21,7 @@ export function BarraNavegacion() {
         localStorage.removeItem('token');
         localStorage.clear();
     };
-    
-    // const getUserFullName =  localStorage.getItem('nombre')+' '+localStorage.getItem('apellido')?.split(' ')[0];
-    
+
     return (
       <Navbar className='bg-white border-gray-200 dark:bg-gray-200 p-4' fluid rounded>
         <span className="self-rigth whitespace-nowrap text-xl font-semibold dark:text-black">
